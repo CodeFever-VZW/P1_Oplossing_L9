@@ -10,9 +10,9 @@ achtergrondkleur = (240, 230, 190)
 penseelvorm = "cirkel"
 
 pygame.init()
-DISPLAYSURF = pygame.display.set_mode((breedte, hoogte))
+venster = pygame.display.set_mode((breedte, hoogte))
 pygame.display.set_caption('Codefever Paint')
-DISPLAYSURF.fill(achtergrondkleur)
+venster.fill(achtergrondkleur)
 
 
 def random_kleur():
@@ -30,12 +30,12 @@ while True:
         if pygame.mouse.get_pressed() == (True, False, False):
             # penseelkleur = random_kleur()
             if penseelvorm == "cirkel":
-                pygame.draw.circle(DISPLAYSURF, penseelkleur, muispos, dikte)
+                pygame.draw.circle(venster, penseelkleur, muispos, dikte)
             elif penseelvorm == "vierkant":
-                pygame.draw.rect(DISPLAYSURF, penseelkleur, (muispos, (2 * dikte, 2 * dikte)))
+                pygame.draw.rect(venster, penseelkleur, (muispos, (2 * dikte, 2 * dikte)))
         # Rechtermuisknop: gom
         if pygame.mouse.get_pressed() == (False, False, True):
-            pygame.draw.circle(DISPLAYSURF, achtergrondkleur, muispos, dikte + 3)
+            pygame.draw.circle(venster, achtergrondkleur, muispos, dikte + 3)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                 penseelkleur = (255, 0, 0)
@@ -57,15 +57,15 @@ while True:
                 penseelkleur = (rood, groen, blauw)
             if event.key == pygame.K_s:
                 bestandsnaam = input("Opslaan als: ")
-                pygame.image.save(DISPLAYSURF, "kunstwerken/" + bestandsnaam + ".jpg")
+                pygame.image.save(venster, "kunstwerken/" + bestandsnaam + ".jpg")
             if event.key == pygame.K_m:
                 penseelkleur = random_kleur()
             if event.key == pygame.K_w:
-                DISPLAYSURF.fill(achtergrondkleur)
+                venster.fill(achtergrondkleur)
             if event.key == pygame.K_i:
                 bestandsnaam = input("Geef bestandsnaam: ")
                 afbeelding = pygame.image.load(bestandsnaam)
-                DISPLAYSURF.blit(afbeelding, (0, 0))
+                venster.blit(afbeelding, (0, 0))
             if event.key == pygame.K_v:
                 penseelvorm = "vierkant"
             if event.key == pygame.K_c:
